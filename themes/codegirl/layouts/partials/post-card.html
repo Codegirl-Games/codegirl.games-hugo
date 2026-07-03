@@ -1,0 +1,9 @@
+<a class="post-list__link" href="{{ .RelPermalink }}">
+  <p class="post-list__meta">
+    {{ with .Params.type }}<span class="post-list__type">{{ humanize . }}</span>{{ end }}
+    <time class="post-list__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  </p>
+  <h3 class="post-list__title">{{ .Title }}</h3>
+  {{ with .Description }}<p class="post-list__excerpt">{{ . }}</p>{{ end }}
+  {{ with .Params.series }}<p class="post-list__series">{{ . }}</p>{{ end }}
+</a>

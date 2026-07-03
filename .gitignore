@@ -1,0 +1,19 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Env / secrets (deploy keys, API tokens, etc.)
+.env
+.env.*

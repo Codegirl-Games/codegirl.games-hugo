@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article class="post container container--narrow">
+  <header class="post__header">
+    <p class="post__meta">
+      {{ with .Params.type }}<span class="post__type">{{ humanize . }}</span>{{ end }}
+      <time class="post__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    </p>
+    <h1 class="post__title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="post__lead">{{ . }}</p>{{ end }}
+    {{ with .Params.languages }}
+    <p class="post__tags">{{ delimit . ", " }}</p>
+    {{ end }}
+    {{ with .Params.series }}
+    <p class="post__series">Part of {{ . }}</p>
+    {{ end }}
+    {{ with .Params.video_url }}
+    <figure class="post__video">
+      <iframe
+        class="post__iframe"
+        src="{{ . }}"
+        title="{{ $.Title }}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </figure>
+    {{ end }}
+    {{ if and .Params.book .Params.chapter }}
+    <p class="post__reference">From <em>{{ .Params.book }}</em> — Chapter {{ .Params.chapter }}</p>
+    {{ end }}
+  </header>
+  <div class="post__body content">{{ .Content }}</div>
+</article>
+{{ end }}

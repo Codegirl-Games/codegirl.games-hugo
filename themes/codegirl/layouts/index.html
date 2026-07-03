@@ -1,0 +1,8 @@
+{{ define "main" }}
+<section class="coming-soon container">
+  <h1 class="coming-soon__title">{{ .Title }}</h1>
+  {{ with .Content }}
+  <div class="coming-soon__body content">{{ . }}</div>
+  {{ end }}
+</section>
+{{ end }}

@@ -1,0 +1,9 @@
+name = "Codegirl"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Dark, minimal theme for Codegirl Games"
+tags = ["dark", "minimal", "blog"]
+min_version = "0.120.0"
+
+[author]
+  name = "Codegirl Games"

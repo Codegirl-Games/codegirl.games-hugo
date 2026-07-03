@@ -1,0 +1,17 @@
+baseURL = 'https://codegirl.games/'
+languageCode = 'en-us'
+title = 'codegirl.games'
+theme = 'codegirl'
+
+[params]
+  logo = 'codegirl.games'
+  description = 'Building affordable, full-feature games in public — and teaching game development along the way.'
+  author = 'Codegirl Games'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ['HTML', 'RSS']
