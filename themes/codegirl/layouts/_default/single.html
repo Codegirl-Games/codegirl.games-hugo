@@ -25,7 +25,7 @@
     </figure>
     {{ end }}
     {{ if and .Params.book .Params.chapter }}
-    <p class="post__reference">From <em>{{ .Params.book }}</em> — Chapter {{ .Params.chapter }}</p>
+    <p class="post__reference">From <em>{{ .Params.book }}</em>, Chapter {{ .Params.chapter }}</p>
     {{ end }}
   </header>
   <div class="post__body content">{{ .Content }}</div>

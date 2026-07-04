@@ -1,13 +1,13 @@
 baseURL = 'https://codegirl.games/'
-languageCode = 'en-us'
+languageCode = 'en-me'
 title = 'codegirl.games'
 theme = 'codegirl'
 
 [params]
   logo = 'codegirl.games'
   logo_image = '/images/logo.png'
-  description = 'We build affordable games and teach the craft along the way — documenting every step in public.'
-  tagline = 'Affordable games. Built in public.'
+  description = 'I build games and show the craft along the way, documenting every step in public.'
+  tagline = 'Building games and showing what I learn'
   author = 'Codegirl Games'
 
 [markup]
