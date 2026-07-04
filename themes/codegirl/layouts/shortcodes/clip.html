@@ -1,0 +1,12 @@
+{{- $src := .Get "src" -}}
+{{- if not (or (hasPrefix $src "/") (hasPrefix $src "http")) -}}
+  {{- $src = .Page.RelPermalink | path.Join $src -}}
+{{- end -}}
+<figure class="clip">
+  <video controls playsinline preload="metadata">
+    <source src="{{ $src }}" type="{{ .Get "type" | default "video/mp4" }}">
+  </video>
+  {{- with .Get "caption" -}}
+  <figcaption>{{ . }}</figcaption>
+  {{- end -}}
+</figure>

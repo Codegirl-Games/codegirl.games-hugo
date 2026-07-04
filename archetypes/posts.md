@@ -8,7 +8,6 @@ series: ""
 series_order: 0
 languages: []
 tags: []
-video_url: ""
 book: ""
 chapter: 0
 ---

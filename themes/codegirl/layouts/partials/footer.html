@@ -1,3 +1,10 @@
 <footer class="site-footer container">
-  <p class="site-footer__copy">&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+  <div class="site-footer__inner">
+    <p class="site-footer__tagline">{{ .Site.Params.tagline }}</p>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a class="site-footer__link" href="{{ "/posts/" | relURL }}">Posts</a>
+      <a class="site-footer__link" href="{{ "/about/" | relURL }}">About</a>
+    </nav>
+    <p class="site-footer__copy">&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+  </div>
 </footer>

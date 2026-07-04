@@ -1,8 +1,22 @@
 {{ define "main" }}
-<section class="coming-soon container">
-  <h1 class="coming-soon__title">{{ .Title }}</h1>
+<section class="hero container">
+  <p class="hero__eyebrow">{{ .Site.Params.tagline }}</p>
+  <h1 class="hero__title">{{ .Title }}</h1>
   {{ with .Content }}
-  <div class="coming-soon__body content">{{ . }}</div>
+  <div class="hero__body content">{{ . }}</div>
   {{ end }}
+</section>
+<section class="latest container">
+  <header class="latest__header">
+    <h2 class="latest__title">Latest</h2>
+    <a class="latest__link" href="{{ "/posts/" | relURL }}">All posts →</a>
+  </header>
+  <ul class="post-list">
+    {{ range where .Site.RegularPages "Section" "eq" "posts" | first 12 }}
+    <li class="post-list__item">
+      {{ partial "post-card.html" . }}
+    </li>
+    {{ end }}
+  </ul>
 </section>
 {{ end }}

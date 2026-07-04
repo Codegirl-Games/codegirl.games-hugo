@@ -5,7 +5,9 @@ theme = 'codegirl'
 
 [params]
   logo = 'codegirl.games'
-  description = 'Building affordable, full-feature games in public — and teaching game development along the way.'
+  logo_image = '/images/logo.png'
+  description = 'We build affordable games and teach the craft along the way — documenting every step in public.'
+  tagline = 'Affordable games. Built in public.'
   author = 'Codegirl Games'
 
 [markup]
