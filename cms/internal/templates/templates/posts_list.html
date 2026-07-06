@@ -1,0 +1,45 @@
+{{template "layout" .}}
+{{define "content"}}
+<div class="page-header">
+  <h1>Posts</h1>
+  <a href="/admin/posts/new" class="btn btn-primary">New Post</a>
+</div>
+
+<form method="GET" action="/admin/posts" class="search-bar">
+  <input type="search" name="q" value="{{.Query}}" placeholder="Search by title…" aria-label="Search posts">
+  <button type="submit" class="btn btn-secondary">Search</button>
+  {{if .Query}}<a href="/admin/posts" class="btn btn-ghost">Clear</a>{{end}}
+</form>
+
+<section class="card">
+  {{if .Posts}}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Posts}}
+        <tr>
+          <td><a href="/admin/posts/{{.Slug}}">{{.Title}}</a></td>
+          <td><code>{{.Slug}}</code></td>
+          <td><span class="badge {{draftBadge .Draft}}">{{if .Draft}}Draft{{else}}Published{{end}}</span></td>
+          <td>{{formatDate .Date}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <p class="empty-state">
+    {{if .Query}}No posts match your search.{{else}}No posts yet.{{end}}
+    <a href="/admin/posts/new">Create a post</a>.
+  </p>
+  {{end}}
+</section>
+{{end}}

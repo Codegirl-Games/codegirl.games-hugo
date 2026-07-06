@@ -17,3 +17,7 @@ Thumbs.db
 # Env / secrets (deploy keys, API tokens, etc.)
 .env
 .env.*
+!.env.example
+
+# CMS binary
+/cms/hugo-cms

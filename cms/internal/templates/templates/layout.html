@@ -1,0 +1,37 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title}} · Hugo CMS</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+  {{block "head" .}}{{end}}
+</head>
+<body>
+  {{if ne .Title "Login"}}
+  <nav class="topnav">
+    <a href="/admin" class="brand">Hugo CMS</a>
+    <div class="nav-links">
+      <a href="/admin" class="{{if eq .Active "dashboard"}}active{{end}}">Dashboard</a>
+      <a href="/admin/posts" class="{{if eq .Active "posts"}}active{{end}}">Posts</a>
+      <a href="/admin/media" class="{{if eq .Active "media"}}active{{end}}">Media</a>
+    </div>
+    <div class="nav-actions">
+      <button type="button" id="theme-toggle" class="btn-icon" title="Toggle dark mode" aria-label="Toggle dark mode">◐</button>
+      <form method="POST" action="/logout" class="inline-form">
+        <button type="submit" class="btn btn-ghost">Logout</button>
+      </form>
+    </div>
+  </nav>
+  {{end}}
+
+  <main class="container">
+    {{block "content" .}}{{end}}
+  </main>
+
+  <script src="/assets/js/app.js"></script>
+  {{block "scripts" .}}{{end}}
+</body>
+</html>
+{{end}}

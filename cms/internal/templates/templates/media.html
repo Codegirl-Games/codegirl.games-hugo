@@ -1,0 +1,36 @@
+{{template "layout" .}}
+{{define "content"}}
+<div class="page-header">
+  <h1>Media Library</h1>
+</div>
+
+<section class="card">
+  <form id="media-upload-form" class="upload-form" enctype="multipart/form-data">
+    <input type="file" id="media-file" name="file" accept="image/*" required>
+    <button type="submit" class="btn btn-primary">Upload Image</button>
+    <span id="upload-status" class="save-status"></span>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Uploaded Images</h2>
+  {{if .Items}}
+  <div class="media-grid media-grid-page">
+    {{range .Items}}
+    <div class="media-item">
+      <img src="{{.URL}}" alt="{{.Name}}" loading="lazy">
+      <div class="media-meta">
+        <code>{{.Name}}</code>
+        <button type="button" class="btn btn-ghost btn-sm copy-md" data-url="{{.URL}}">Copy Markdown</button>
+      </div>
+    </div>
+    {{end}}
+  </div>
+  {{else}}
+  <p class="empty-state">No images uploaded yet.</p>
+  {{end}}
+</section>
+{{end}}
+{{define "scripts"}}
+<script src="/assets/js/media.js"></script>
+{{end}}

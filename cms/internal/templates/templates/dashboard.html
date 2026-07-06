@@ -1,0 +1,53 @@
+{{template "layout" .}}
+{{define "content"}}
+<div class="page-header">
+  <h1>Dashboard</h1>
+  <a href="/admin/posts/new" class="btn btn-primary">New Post</a>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <span class="stat-value">{{.Stats.Total}}</span>
+    <span class="stat-label">Total Posts</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-value">{{.Stats.Published}}</span>
+    <span class="stat-label">Published</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-value">{{.Stats.Drafts}}</span>
+    <span class="stat-label">Drafts</span>
+  </div>
+</div>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Recent Posts</h2>
+    <a href="/admin/posts" class="link">View all</a>
+  </div>
+  {{if .RecentPosts}}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .RecentPosts}}
+        <tr>
+          <td><a href="/admin/posts/{{.Slug}}">{{.Title}}</a></td>
+          <td><span class="badge {{draftBadge .Draft}}">{{if .Draft}}Draft{{else}}Published{{end}}</span></td>
+          <td>{{formatDate .Date}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <p class="empty-state">No posts yet. <a href="/admin/posts/new">Create your first post</a>.</p>
+  {{end}}
+</section>
+{{end}}

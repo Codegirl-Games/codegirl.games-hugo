@@ -1,0 +1,70 @@
+{{template "layout" .}}
+{{define "head"}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css">
+{{end}}
+{{define "content"}}
+<div class="page-header">
+  <h1>{{if .IsNew}}New Post{{else}}Edit Post{{end}}</h1>
+  <div class="header-actions">
+    <span id="save-status" class="save-status"></span>
+    <button type="button" id="save-btn" class="btn btn-primary">Save</button>
+  </div>
+</div>
+
+<form id="post-form" class="post-form">
+  <input type="hidden" id="original" value="{{.Original}}">
+
+  <div class="form-grid">
+    <label class="span-2">
+      <span>Title</span>
+      <input type="text" id="title" value="{{.Title}}" required>
+    </label>
+
+    <label>
+      <span>Slug</span>
+      <input type="text" id="slug" value="{{.Slug}}" required pattern="[a-z0-9-]+" title="Lowercase letters, numbers, and hyphens only">
+    </label>
+
+    <label>
+      <span>Date</span>
+      <input type="datetime-local" id="date" value="{{.Date}}" required>
+    </label>
+
+    <label>
+      <span>Tags</span>
+      <input type="text" id="tags" value="{{.Tags}}" placeholder="hugo, programming">
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="draft" {{if .Draft}}checked{{end}}>
+      <span>Draft</span>
+    </label>
+  </div>
+
+  <label class="editor-label">
+    <span>Body</span>
+    <textarea id="body">{{.Body}}</textarea>
+  </label>
+</form>
+
+<div class="editor-toolbar-extra">
+  <button type="button" id="insert-media-btn" class="btn btn-secondary">Insert from Media Library</button>
+  <input type="file" id="image-upload" accept="image/*" hidden>
+  <button type="button" id="upload-image-btn" class="btn btn-secondary">Upload Image</button>
+</div>
+
+<div id="media-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Media library">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Media Library</h2>
+      <button type="button" class="btn-icon" data-close-modal aria-label="Close">×</button>
+    </div>
+    <div id="media-grid" class="media-grid"></div>
+  </div>
+</div>
+{{end}}
+{{define "scripts"}}
+<script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+<script src="/assets/js/editor.js"></script>
+{{end}}
