@@ -1,6 +1,6 @@
 ---
 title: Posts
-description: Devlogs, lessons, language comparisons, and book reviews from my game development work.
+description: The build log — every note from prototypes in progress.
 ---
 
-Devlogs, lessons, and experiments from my game development journey.
+Dated entries from games I’m actually building.

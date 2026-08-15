@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article class="post container">
+<article class="post container container--narrow">
   <header class="post__header">
     <p class="post__meta">
       {{ with .Params.type }}<span class="post__type">{{ humanize . }}</span>{{ end }}
@@ -10,8 +10,14 @@
     {{ with .Params.languages }}
     <p class="post__tags">{{ delimit . ", " }}</p>
     {{ end }}
-    {{ with .Params.series }}
-    <p class="post__series">Part of {{ . }}</p>
+    {{ with .GetTerms "series" }}
+      {{ range . }}
+      <p class="post__series">Part of <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
+      {{ end }}
+    {{ else }}
+      {{ with .Params.series }}
+      <p class="post__series">Part of <a href="{{ printf "/series/%s/" . | relURL }}">{{ replace . "-" " " | title }}</a></p>
+      {{ end }}
     {{ end }}
     {{ with .Params.video_url }}
     <figure class="post__video">
@@ -29,5 +35,27 @@
     {{ end }}
   </header>
   <div class="post__body content">{{ .Content }}</div>
+
+  {{ with .Params.series }}
+  {{ $seriesName := . }}
+  {{ $siblings := where (where $.Site.RegularPages "Section" "eq" "posts") "Params.series" "eq" $seriesName }}
+  {{ $sorted := $siblings.ByDate }}
+  {{ if gt (len $sorted) 1 }}
+  <nav class="series-nav" aria-label="More in this series">
+    <p class="series-nav__label">In this series</p>
+    <ol class="series-nav__list">
+      {{ range $sorted }}
+      <li class="series-nav__item{{ if eq $.RelPermalink .RelPermalink }} series-nav__item--current{{ end }}">
+        {{ if eq $.RelPermalink .RelPermalink }}
+        <span class="series-nav__current">{{ .Title }}</span>
+        {{ else }}
+        <a class="series-nav__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ol>
+  </nav>
+  {{ end }}
+  {{ end }}
 </article>
 {{ end }}

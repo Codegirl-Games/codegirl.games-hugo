@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="about">
+  <div class="about__banner">
+    <div class="about__banner-inner container">
+      {{ with .Site.Params.logo_image_full }}
+      <img
+        class="about__logo"
+        src="{{ . | relURL }}"
+        alt="{{ $.Site.Params.logo | default $.Site.Title }}"
+        width="512"
+        height="512"
+        decoding="async"
+      >
+      {{ end }}
+      <div class="about__intro">
+        <h1 class="about__title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="about__lead">{{ . }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  <div class="about__body container container--narrow content">{{ .Content }}</div>
+  <div class="about__cta-wrap container container--narrow">
+    <a class="stage__cta" href="{{ "/posts/" | relURL }}">Open the build log</a>
+  </div>
+</article>
+{{ end }}

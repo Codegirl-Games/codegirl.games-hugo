@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="section container">
+  <header class="section__header">
+    <p class="section__eyebrow">Series</p>
+    <h1 class="section__title">Active builds</h1>
+    <p class="section__intro">Prototype threads I’m writing while I build them.</p>
+  </header>
+  <div class="workbench__grid">
+    {{ range .Pages }}
+    <a class="workbench__cell" href="{{ .RelPermalink }}">
+      <span class="workbench__count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}log{{ else }}logs{{ end }}</span>
+      <span class="workbench__name">{{ .LinkTitle }}</span>
+      {{ with .Description }}
+      <span class="workbench__desc">{{ . }}</span>
+      {{ end }}
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

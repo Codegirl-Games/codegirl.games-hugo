@@ -5,5 +5,16 @@
   </p>
   <h3 class="post-list__title">{{ .Title }}</h3>
   {{ with .Description }}<p class="post-list__excerpt">{{ . }}</p>{{ end }}
-  {{ with .Params.series }}<p class="post-list__series">{{ . }}</p>{{ end }}
 </a>
+{{ $seriesTerms := .GetTerms "series" }}
+{{ if $seriesTerms }}
+  {{ range $seriesTerms }}
+  <p class="post-list__series">
+    <a class="post-list__series-link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  </p>
+  {{ end }}
+{{ else if .Params.series }}
+  <p class="post-list__series">
+    <a class="post-list__series-link" href="{{ printf "/series/%s/" .Params.series | relURL }}">{{ replace .Params.series "-" " " | title }}</a>
+  </p>
+{{ end }}

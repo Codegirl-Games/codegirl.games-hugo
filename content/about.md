@@ -1,10 +1,9 @@
 ---
 title: About
-description: A place where I build games and share the development process in public.
+description: Games in progress. Notes in public. No finished portfolio cosplay.
+layout: about
 ---
 
-**Codegirl Games** is a place where I build games and share how they're made: devlogs, experiments, and lessons from real projects.
+**Codegirl Games** is a workbench, not a highlight reel.
 
-I'm not pretending to have all the answers. I'm learning in public: comparing languages on the same project, applying patterns from books like *Game Programming Patterns*, and building through trial and error.
-
-Whether you're starting out, leveling up, or just curious how games get made, you're in the right place.
+I build prototypes and write down what the systems taught me — language comparisons, pattern experiments, broken paths, and the next attempt. The art stays honest. The learning stays public.

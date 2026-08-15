@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="section container">
+  <header class="section__header">
+    <p class="section__eyebrow">{{ if eq .Data.Singular "series" }}Series{{ else if eq .Data.Singular "tag" }}Tag{{ else }}{{ .Data.Singular | humanize }}{{ end }}</p>
+    <h1 class="section__title">{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="section__intro content">{{ . }}</div>
+    {{ end }}
+    {{ with .Description }}
+      {{ if not $.Content }}
+      <p class="section__intro">{{ . }}</p>
+      {{ end }}
+    {{ end }}
+  </header>
+  <ul class="post-list">
+    {{ range .Pages.ByDate.Reverse }}
+    <li class="post-list__item">
+      {{ partial "post-card.html" . }}
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

@@ -1,13 +1,15 @@
-<header class="site-header container">
-  <a class="site-header__logo" href="{{ "/" | relURL }}">
-    {{ with .Site.Params.logo_image }}
-    <img class="site-header__logo-image" src="{{ . | relURL }}" alt="{{ $.Site.Params.logo | default $.Site.Title }}">
-    {{ else }}
-    {{ $.Site.Params.logo }}
-    {{ end }}
-  </a>
-  <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__link{{ if eq .Section "posts" }} site-nav__link--active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
-    <a class="site-nav__link{{ if and .IsPage (eq .File.BaseFileName "about") }} site-nav__link--active{{ end }}" href="{{ "/about/" | relURL }}">About</a>
-  </nav>
+<header class="site-header">
+  <div class="site-header__bar container">
+    <a class="site-header__brand" href="{{ "/" | relURL }}">
+      {{ with .Site.Params.logo_image }}
+      <img class="site-header__logo-image" src="{{ . | relURL }}" alt="">
+      {{ end }}
+      <span class="site-header__wordmark">{{ .Site.Params.logo | default .Site.Title }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a class="site-nav__link{{ if eq .Section "posts" }} site-nav__link--active{{ end }}" href="{{ "/posts/" | relURL }}">Posts</a>
+      <a class="site-nav__link{{ if eq .Section "series" }} site-nav__link--active{{ end }}" href="{{ "/series/" | relURL }}">Series</a>
+      <a class="site-nav__link{{ if and .IsPage (eq .File.BaseFileName "about") }} site-nav__link--active{{ end }}" href="{{ "/about/" | relURL }}">About</a>
+    </nav>
+  </div>
 </header>

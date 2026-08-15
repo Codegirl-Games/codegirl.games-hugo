@@ -1,22 +1,86 @@
 {{ define "main" }}
-<section class="hero container">
-  <p class="hero__eyebrow">{{ .Site.Params.tagline }}</p>
-  <h1 class="hero__title">{{ .Title }}</h1>
-  {{ with .Content }}
-  <div class="hero__body content">{{ . }}</div>
+{{ $featuredHref := "/posts/" | relURL }}
+{{ with .Params.featured_series }}
+  {{ $featuredHref = printf "/series/%s/" . | relURL }}
+{{ end }}
+{{ $hasSeries := gt (len .Site.Taxonomies.series) 0 }}
+{{ $posts := where .Site.RegularPages "Section" "eq" "posts" }}
+
+<section class="stage{{ if not .Params.featured_image }} stage--plain{{ end }}">
+  {{ with .Params.featured_image }}
+  <div class="stage__plane" aria-hidden="true">
+    <img
+      class="stage__image"
+      src="{{ . | relURL }}"
+      alt=""
+      width="960"
+      height="639"
+      loading="eager"
+      decoding="async"
+    >
+  </div>
+  <div class="stage__veil" aria-hidden="true"></div>
   {{ end }}
+  <div class="stage__slab container">
+    <p class="stage__eyebrow">{{ .Site.Params.tagline }}</p>
+    <h1 class="stage__title">{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="stage__body">{{ . }}</div>
+    {{ end }}
+    <div class="stage__actions">
+      {{ if or .Params.featured_series .Params.featured_label }}
+      <a class="stage__cta" href="{{ $featuredHref }}">
+        {{ with .Params.featured_label }}{{ . }}{{ else }}Enter series{{ end }}
+      </a>
+      {{ end }}
+      <a class="stage__{{ if or $.Params.featured_series $.Params.featured_label }}ghost{{ else }}cta{{ end }}" href="{{ "/posts/" | relURL }}">Read the log</a>
+      <a class="stage__ghost" href="{{ "/about/" | relURL }}">About</a>
+    </div>
+    {{ with .Params.featured_caption }}
+    <p class="stage__caption">{{ . }}</p>
+    {{ end }}
+  </div>
 </section>
-<section class="latest container">
-  <header class="latest__header">
-    <h2 class="latest__title">Latest</h2>
-    <a class="latest__link" href="{{ "/posts/" | relURL }}">All posts →</a>
+
+{{ if $hasSeries }}
+<section class="workbench container" aria-label="Active series">
+  <header class="workbench__header">
+    <h2 class="workbench__title">Active builds</h2>
   </header>
-  <ul class="post-list">
-    {{ range where .Site.RegularPages "Section" "eq" "posts" | first 12 }}
-    <li class="post-list__item">
-      {{ partial "post-card.html" . }}
+  <div class="workbench__grid">
+    {{ range $term, $pages := .Site.Taxonomies.series }}
+    {{ $termPage := $.Site.GetPage (printf "/series/%s" $term) }}
+    <a class="workbench__cell" href="{{ with $termPage }}{{ .RelPermalink }}{{ else }}{{ printf "/series/%s/" $term | relURL }}{{ end }}">
+      <span class="workbench__count">{{ len $pages }} {{ if eq (len $pages) 1 }}log{{ else }}logs{{ end }}</span>
+      <span class="workbench__name">{{ with $termPage }}{{ .LinkTitle }}{{ else }}{{ replace $term "-" " " | title }}{{ end }}</span>
+      {{ with $termPage }}
+        {{ with .Description }}
+        <span class="workbench__desc">{{ . }}</span>
+        {{ end }}
+      {{ end }}
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ if gt (len $posts) 0 }}
+<section class="log container">
+  <header class="log__header">
+    <h2 class="log__title">Build log</h2>
+    <a class="log__all" href="{{ "/posts/" | relURL }}">All entries →</a>
+  </header>
+  <ol class="log__list">
+    {{ range first 12 $posts }}
+    <li class="log__item">
+      <a class="log__row" href="{{ .RelPermalink }}">
+        <time class="log__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "060102" }}</time>
+        <span class="log__type">{{ with .Params.type }}{{ . }}{{ else }}note{{ end }}</span>
+        <span class="log__name">{{ .Title }}</span>
+      </a>
     </li>
     {{ end }}
-  </ul>
+  </ol>
 </section>
+{{ end }}
 {{ end }}

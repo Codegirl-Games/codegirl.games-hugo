@@ -1,14 +1,26 @@
 baseURL = 'https://codegirl.games/'
-languageCode = 'en-me'
 title = 'codegirl.games'
 theme = 'codegirl'
+defaultContentLanguage = 'en'
+
+[languages]
+  [languages.en]
+    locale = 'en-US'
+    label = 'English'
+    weight = 1
 
 [params]
   logo = 'codegirl.games'
-  logo_image = '/images/logo.png'
+  logo_image = '/images/logo-header.png'
+  logo_image_full = '/images/logo.png'
   description = 'I build games and show the craft along the way, documenting every step in public.'
   tagline = 'Building games and showing what I learn'
   author = 'Codegirl Games'
+  og_image = '/images/og-default.png'
+
+[taxonomies]
+  tag = 'tags'
+  series = 'series'
 
 [markup]
   [markup.goldmark]

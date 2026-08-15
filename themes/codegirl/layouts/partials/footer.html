@@ -1,9 +1,14 @@
-<footer class="site-footer container">
-  <div class="site-footer__inner">
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <p class="site-footer__mark">{{ .Site.Params.logo | default .Site.Title }}</p>
     <p class="site-footer__tagline">{{ .Site.Params.tagline }}</p>
     <nav class="site-footer__nav" aria-label="Footer">
       <a class="site-footer__link" href="{{ "/posts/" | relURL }}">Posts</a>
+      <a class="site-footer__link" href="{{ "/series/" | relURL }}">Series</a>
       <a class="site-footer__link" href="{{ "/about/" | relURL }}">About</a>
+      {{ with .Site.Home.OutputFormats.Get "RSS" }}
+      <a class="site-footer__link" href="{{ .RelPermalink }}">RSS</a>
+      {{ end }}
     </nav>
     <p class="site-footer__copy">&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
   </div>
