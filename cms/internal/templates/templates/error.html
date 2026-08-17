@@ -1,0 +1,9 @@
+{{template "layout" .}}
+{{define "content"}}
+<div class="card">
+  <h1>Error</h1>
+  <p>{{.Message}}</p>
+  {{if .Error}}<pre class="error-detail">{{.Error}}</pre>{{end}}
+  <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{{end}}

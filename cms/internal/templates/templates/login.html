@@ -1,0 +1,23 @@
+{{template "layout" .}}
+{{define "content"}}
+<div class="login-page">
+  <div class="login-card">
+    <h1>Hugo CMS</h1>
+    <p class="subtitle">Sign in to manage your site</p>
+    {{if .Error}}
+    <div class="alert alert-error">Invalid username or password</div>
+    {{end}}
+    <form method="POST" action="/login" class="form">
+      <label>
+        <span>Username</span>
+        <input type="text" name="username" required autocomplete="username" autofocus>
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    </form>
+  </div>
+</div>
+{{end}}
